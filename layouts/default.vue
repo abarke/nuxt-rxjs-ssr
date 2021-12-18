@@ -1,7 +1,12 @@
 <template>
   <div>
-    <header>
-      <h1>Nuxt JS RxJS SSR Example</h1>
+    <header class="hero-body">
+      <p class="title">
+        Nuxt JS RxJS SSR Example
+      </p>
+      <p class="subtitle">
+        Mastering SSR and Observables
+      </p>
     </header>
     <section>
       <nuxt />

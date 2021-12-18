@@ -9,10 +9,14 @@
     "generate": "nuxt generate"
   },
   "devDependencies": {
+    "@nuxt/types": "^2.15.8",
     "core-js": "^3.9.1",
-    "nuxt": "^2.15.3"
+    "nuxt": "^2.15.3",
+    "prettier": "^2.5.1"
   },
   "dependencies": {
-    "nuxt-buefy": "^0.4.13"
+    "nuxt-buefy": "^0.4.13",
+    "rxjs": "^7.4.0",
+    "vue-rx": "^6.2.0"
   }
 }
