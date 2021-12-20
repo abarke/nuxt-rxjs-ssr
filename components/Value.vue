@@ -1,13 +1,20 @@
 <template>
-  <article class="box notification is-primary is-4 m-6">
-    <p class="title">Component {{ name }}</p>
-    <p class="title is-6">Selected: {{ input$ }}</p>
-    <p class="title is-6">Value: {{ value$ }}</p>
-  </article>
+  <div class="tile is-parent">
+    <div class="tile is-child notification is-primary">
+      <p class="title">Component {{ name }}</p>
+      <p class="title is-6">Channel {{ channel$ }}</p>
+      <p class="title is-6">Value: {{ value$ }}</p>
+    </div>
+  </div>
 </template>
 
 <script>
-import { interval, map, switchMap } from 'rxjs'
+/**
+ * @property Observable input$
+ */
+
+import { interval, map, switchMap, takeWhile } from 'rxjs'
+import { debug, LogLevel } from '../rxjs/debug';
 
 export default {
   props: {
@@ -15,25 +22,28 @@ export default {
       type: String,
       required: true
     },
-    input: {
+    channel: {
       type: String,
       required: true
     },
   },
 
   subscriptions() {
-    const input$ = this.$watchAsObservable('input', { immediate: true }).pipe(
-      map((event) => event.newValue)
+    const channel$ = this.$watchAsObservable('channel', { immediate: true }).pipe(
+      map((event) => event.newValue),
     )
 
-    const value$ = input$.pipe(
+    const value$ = channel$.pipe(
       switchMap((input) => interval(1000).pipe(
-        map((count) => input + count))
-      )
+        takeWhile(() => process.client),
+        debug(LogLevel.TRACE, 'inner'),
+        map((count) => input + count)),
+      ),
+      debug(LogLevel.TRACE, 'outer'),
     )
 
     return {
-      input$,
+      channel$,
       value$
     }
   }
