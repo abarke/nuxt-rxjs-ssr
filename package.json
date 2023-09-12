@@ -17,6 +17,7 @@
   "dependencies": {
     "nuxt-buefy": "^0.4.13",
     "rxjs": "^7.4.0",
-    "vue-rx": "^6.2.0"
+    "vue-rx": "^6.2.0",
+    "typescript": "5.2.2"
   }
 }
